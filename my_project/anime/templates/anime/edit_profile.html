@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block main %}
+
+    <div class="d-flex justify-content-between">
+        <div class="col-6">
+            <div class="card p-3" style="margin-top: 30px; margin-left: 30px; margin-right: 40px;">
+                <h5 class="text-center">Изменить аккаунт</h5>
+                <hr>
+                <form action="{% url 'edit_account' %}" method="post" class="account">
+                    {% csrf_token %}
+                    {{ edit_account_form.as_p }}
+                    <button class="btn btn-outline-dark" type="submit">Изменить</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card p-3" style="margin-top: 30px; margin-left: 30px; margin-right: 30px;">
+                <h5 class="text-center">Изменить профиль</h5>
+                <hr>
+                <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ edit_profile_form.as_p }}
+                    <button class="btn btn-outline-dark" type="submit">Изменить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock main %}

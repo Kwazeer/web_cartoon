@@ -1,0 +1,27 @@
+* {
+    text-decoration: none !important;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+    padding-top: 100px;
+    background: url("../images/anime-style-galaxy-background.jpg") fixed;
+    background-size: cover;
+}
+
+.auth_form label {
+    display: none;
+}
+
+.helptext, .account div {
+    display: none;
+}
+
+.account p label:last-child {
+    display: none;
+}

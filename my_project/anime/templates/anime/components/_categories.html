@@ -1,0 +1,17 @@
+{% load anime_tags %}
+
+<div class="col-3">
+    <div class="d-flex m-3">
+        <ul class="list-unstyled fs-4 border rounded p-4 bg-light">
+            <li>
+            {% url 'index' as index_url %}
+        <a href="{% url 'index' %}" class="btn {% if request.path == index_url %}btn-secondary{% else %}btn-primary{% endif %} btn-block w-100">Все категории</a></li>
+            <hr style="margin: 5px">
+            {% get_categories as categories %}
+            {% for category in categories %}
+                <li><a href="{{ category.get_absolute_url }}" class="btn {% if request.path == category.get_absolute_url %}btn-secondary{% else %}btn-outline-primary{% endif %} btn-block w-100">{{ category.title }}</a></li>
+                <hr style="margin: 5px">
+            {% endfor %}
+        </ul>
+    </div>
+</div>

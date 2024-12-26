@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+
+{% block main %}
+
+    <div class="d-flex justify-content-center" style="padding-top: 100px;">
+        <div class="card bg-dark border text-light p-3">
+            <h4>Вы действительно хотите удалить {{ anime.title }}</h4>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-danger fs-4">Да</button>
+                    <a href="{{ anime.get_absolute_url }}" class="btn btn-success fs-4">Нет</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock main %}

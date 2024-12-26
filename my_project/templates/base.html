@@ -1,0 +1,84 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'anime/css/style.css' %}">
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
+</head>
+<body class="bg-black">
+
+{# Панель с навигацией #}
+<nav class="navbar navbar-expand-lg navbar-dark pt-3 pb-3 fixed-top">
+    <div class="container border rounded p-3 bg-dark">
+        <a class="navbar-brand fs-3 text-info" href="{% url 'index' %}">Anime Watch</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Здравствуйте, {{ request.user.username }}!
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'profile' request.user.username %}">Мой профиль</a></li>
+                        {% if request.user.is_staff %}
+                            <li><a class="dropdown-item" href="{% url 'add_anime' %}">Добавить аниме</a></li>
+                        {% endif %}
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Выход</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    {% else %}
+                    <a href="{% url 'login' %}" class="nav-link">Войти</a>
+                    <a href="{% url 'registration' %}" class="nav-link">Регистрация</a>
+                    {% endif %}
+                </li>
+            </ul>
+            <form class="d-flex w-50" role="search" method="get" action="{% url 'search_anime' %}">
+                <input name="q" class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+                <button class="btn btn-outline-info" type="submit">Поиск</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+{# Подключение уведомления #}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        {% include 'components/_messages.html' %}
+    </div>
+</div>
+
+
+<div class="container">
+    {% block main %}
+
+    {% endblock main %}
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+<script src="{% static 'anime/js/message_fade.js' %}" defer></script>
+
+</body>
+</html>
