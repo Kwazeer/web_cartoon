@@ -1,2 +1,2 @@
-Создать виртуальное окружение (py -m venv .venv)
-Установить необходимые библиотеки (pip install -r requirements.txt)
+1. Создать виртуальное окружение (py -m venv .venv)
+2. Установить необходимые библиотеки (pip install -r requirements.txt)
